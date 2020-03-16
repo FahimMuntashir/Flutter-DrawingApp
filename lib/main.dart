@@ -12,7 +12,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<Offset> _points;
+  List<Offset> _points = <Offset>[];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,8 +27,18 @@ class _HomePageState extends State<HomePage> {
               _points = new List.from(_points)..add(_loclposition);
             });
           } ,
+          onPanEnd: (DragEndDetails details)=> _points.add(null),
+          child: new CustomPaint(
+            painter: new Signature(points: _points),
+            size: Size.infinite,
+          ),
         ),
 
+
+      ),
+      floatingActionButton: new FloatingActionButton(
+        child: new Icon(Icons.clear),
+        onPressed: () => _points.clear(),
       ),
     );
   }
