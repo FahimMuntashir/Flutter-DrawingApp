@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(new MaterialApp(
-     home: new HomePage(),
-  debugShowCheckedModeBanner: false,
-));
+      home: new HomePage(),
+      debugShowCheckedModeBanner: false,
+    ));
 
 class HomePage extends StatefulWidget {
   @override
@@ -18,23 +18,20 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: new Container(
         child: new GestureDetector(
-
-          onPanUpdate:(DragUpdateDetails details){
-
+          onPanUpdate: (DragUpdateDetails details) {
             setState(() {
               RenderBox object = context.findRenderObject();
-              Offset _loclposition = object.globalToLocal(details.globalPosition);
+              Offset _loclposition =
+                  object.globalToLocal(details.globalPosition);
               _points = new List.from(_points)..add(_loclposition);
             });
-          } ,
-          onPanEnd: (DragEndDetails details)=> _points.add(null),
+          },
+          onPanEnd: (DragEndDetails details) => _points.add(null),
           child: new CustomPaint(
             painter: new Signature(points: _points),
             size: Size.infinite,
           ),
         ),
-
-
       ),
       floatingActionButton: new FloatingActionButton(
         child: new Icon(Icons.clear),
@@ -43,29 +40,24 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-class Signature extends CustomPainter{
+
+class Signature extends CustomPainter {
   List<Offset> points;
   Signature({this.points});
 
   @override
   void paint(Canvas canvas, Size size) {
-
     Paint paint = new Paint()
-    ..color = Colors.black
-    ..strokeCap = StrokeCap.round
-    ..strokeWidth = 5.0;
-    for(int i = 0; i<points.length-1;i++)
-      {
-        if(points[i] !=null && points[i+1] != null)
-          {
-            canvas.drawLine(points[i], points[i+1], paint);
-          }
+      ..color = Colors.blue
+      ..strokeCap = StrokeCap.round
+      ..strokeWidth = 5.0;
+    for (int i = 0; i < points.length - 1; i++) {
+      if (points[i] != null && points[i + 1] != null) {
+        canvas.drawLine(points[i], points[i + 1], paint);
       }
+    }
   }
 
   @override
   bool shouldRepaint(Signature oldDelegate) => oldDelegate.points != points;
-
-
-  }
-
+}
