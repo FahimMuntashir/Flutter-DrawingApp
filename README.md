@@ -1,4 +1,6 @@
-# drawing
+# Flutter Simple Drawing Board
+
+<img src = "demo.png" width="300" >
 
 A new Flutter project.
 
